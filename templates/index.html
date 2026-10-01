@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lung Disease Classification System</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+    <!-- Dynamic Background -->
+    <div class="dynamic-background" aria-hidden="true">
+        <div class="particle-field" id="particleField"></div>
+
+        <div class="floating-medical-element float-one">+</div>
+        <div class="floating-medical-element float-two">+</div>
+        <div class="floating-medical-element float-three">+</div>
+    </div>
+
+    <!-- LungClass Startup Loader -->
+    <div id="startupLoader" class="startup-loader">
+        <div class="loader-content">
+
+            <div class="loader-brand">
+                <div class="startup-logo-container">
+                    <img
+                        src="{{ url_for('static', filename='images/lungclass-logo.png.png') }}"
+                        alt="LungClass"
+                        class="startup-lung-logo"
+                    >
+                </div>
+
+                <h1>LungClass</h1>
+                <p class="loader-subtitle">Ensemble Classification System</p>
+            </div>
+
+            <div class="loader-spinner">
+                <span></span>
+            </div>
+
+            <p class="loader-status" id="loaderStatus">
+                Initializing Classification System...
+            </p>
+
+            <div class="loader-models">
+                <span>Random Forest</span>
+                <span>SVM</span>
+                <span>XGBoost</span>
+                <span>MLP</span>
+            </div>
+
+            <div class="loader-progress">
+                <div class="loader-progress-bar" id="loaderProgressBar"></div>
+            </div>
+
+            <p class="loader-percent" id="loaderPercent">0%</p>
+
+        </div>
+    </div>
+
+    <div class="app-shell">
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <button
+                type="button"
+                id="sidebarToggle"
+                class="sidebar-toggle"
+                aria-label="Collapse sidebar"
+                aria-expanded="true"
+            >
+                <span class="toggle-arrow" aria-hidden="true">‹</span>
+            </button>
+
+            <div class="brand sidebar-brand">
+
+                <div class="sidebar-lung-logo">
+                    <img
+                        src="{{ url_for('static', filename='images/lungclass-logo.png.png') }}"
+                        alt="LungClass"
+                    >
+                </div>
+
+                <div>
+                    <h2 class="sidebar-brand-name"><span class="brand-lung">Lung</span><span class="brand-class">Class</span></h2>
+                    <p class="sidebar-brand-subtitle">Ensemble Classification System</p>
+                </div>
+
+            </div>
+
+            <nav class="navigation">
+
+                <button
+                    class="nav-item active"
+                    data-page="overview"
+                    aria-label="Overview"
+                    title="Overview"
+                >
+                    <span class="nav-icon" aria-hidden="true">⌂</span>
+                    <span class="nav-label">Overview</span>
+                </button>
+
+                <button
+                    class="nav-item"
+                    data-page="prediction"
+                    aria-label="Patient Classification"
+                    title="Patient Classification"
+                >
+                    <span class="nav-icon" aria-hidden="true">⊕</span>
+                    <span class="nav-label">Patient Classification</span>
+                </button>
+
+                <button
+                    class="nav-item"
+                    data-page="performance"
+                    aria-label="Model Performance"
+                    title="Model Performance"
+                >
+                    <span class="nav-icon" aria-hidden="true">▥</span>
+                    <span class="nav-label">Model Performance</span>
+                </button>
+
+                <button
+                    class="nav-item"
+                    data-page="methodology"
+                    aria-label="Methodology"
+                    title="Methodology"
+                >
+                    <span class="nav-icon" aria-hidden="true">≡</span>
+                    <span class="nav-label">Methodology</span>
+                </button>
+
+                <button
+                    class="nav-item"
+                    data-page="project"
+                    aria-label="Project Information"
+                    title="Project Information"
+                >
+                    <span class="nav-icon" aria-hidden="true">ⓘ</span>
+                    <span class="nav-label">Project Information</span>
+                </button>
+
+            </nav>
+
+            <div class="sidebar-status">
+                <span class="status-dot"></span>
+
+                <div class="sidebar-status-content">
+                    <strong class="system-ready">System Ready</strong>
+                    <small class="sidebar-footer-text">Ensemble model loaded</small>
+                    <div class="system-activity">
+                        <span class="activity-dot"></span>
+                        <span id="systemActivityText">
+                            Ensemble system initialized
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+
+            <section
+                id="project"
+                class="page-section"
+            >
+
+                <!-- PAGE HEADING -->
+
+                <div class="page-heading compact">
+
+                    <p class="eyebrow">
+                        PROJECT INFORMATION
+                    </p>
+
+                    <h1>Project &amp; Academic Information</h1>
+
+                    <p>
+                        Academic and developer information for the
+                        Lung Disease Classification System.
+                    </p>
+
+                </div>
+
+                <!-- INFORMATION CARDS -->
+
+                <div class="academic-info-grid">
+
+                    <!-- 01 DEVELOPER INFORMATION -->
+
+                    <div class="academic-info-card featured-card">
+
+                        <div class="academic-card-number featured-number">
+                            01
+                        </div>
+
+                        <span class="academic-card-label">
+                            DEVELOPER INFORMATION
+                        </span>
+
+                        <h2>FADARE OYEWOLE JOHN</h2>
+
+                        <div class="academic-detail-row">
+
+                            <span>Matric Number</span>
+
+                            <strong>
+                                MENG/CPE/2025/002
+                            </strong>
+
+                        </div>
+
+                        <div class="academic-detail-row">
+
+                            <span>Programme</span>
+
+                            <strong>
+                                MSc
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <!-- 02 PROJECT SUPERVISOR -->
+
+                    <div class="academic-info-card">
+
+                        <div class="academic-card-number">
+                            02
+                        </div>
+
+                        <span class="academic-card-label">
+                            PROJECT SUPERVISOR
+                        </span>
+
+                        <h2>Dr. Nnamdi Stephen Okomba</h2>
+
+                        <div class="academic-detail-row">
+
+                            <span>Department</span>
+
+                            <strong>
+                                Computer Engineering
+                            </strong>
+
+                        </div>
+
+                        <div class="academic-detail-row">
+
+                            <span>Project Year</span>
+
+                            <strong>
+                                2026
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <!-- 03 INSTITUTION -->
+
+                    <div class="academic-info-card">
+
+                        <div class="academic-card-number">
+                            03
+                        </div>
+
+                        <span class="academic-card-label">
+                            INSTITUTION
+                        </span>
+
+                        <h2>
+                            Federal University Oye-Ekiti
+                        </h2>
+
+                        <div class="academic-detail-row">
+
+                            <span>Department</span>
+
+                            <strong>
+                                Computer Engineering
+                            </strong>
+
+                        </div>
+
+                        <div class="academic-detail-row">
+
+                            <span>Programme</span>
+
+                            <strong>
+                                MSc
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <!-- 04 CONTACT DETAILS -->
+
+                    <div class="academic-info-card">
+
+                        <div class="academic-card-number">
+                            04
+                        </div>
+
+                        <span class="academic-card-label">
+                            CONTACT DETAILS
+                        </span>
+
+                        <h2>Fadare Jasper</h2>
+
+                        <div class="academic-detail-row">
+
+                            <span>Email</span>
+
+                            <a href="mailto:Fadarejasper@gmail.com">
+                                Fadarejasper@gmail.com
+                            </a>
+
+                        </div>
+
+                        <div class="academic-detail-row">
+
+                            <span>Phone</span>
+
+                            <a href="tel:09131933729">
+                                09131933729
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- PROJECT BANNER -->
+
+                <div class="academic-project-banner">
+
+                    <div class="academic-project-badge">
+                        MSc
+                    </div>
+
+                    <div class="academic-project-text">
+
+                        <strong>
+                            Lung Disease Classification System
+                        </strong>
+
+                        <p>
+                            An academic research project developed in the
+                            Department of Computer Engineering,
+                            Federal University Oye-Ekiti, 2026.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section
+                id="overview"
+                class="page-section active"
+            >
+
+                <div class="page-heading">
+                    <p class="eyebrow">LUNG DISEASE CLASSIFICATION</p>
+
+                    <h1>
+                        Spirometry-based lung disease
+                        classification
+                    </h1>
+
+                    <p>
+                        A machine learning research system for
+                        classifying spirometry records as obstructive
+                        or non-obstructive using a stacked ensemble.
+                    </p>
+                </div>
+
+
+                <div class="metric-grid">
+
+                    <div class="metric-card feature-float">
+                        <span>Base Learners</span>
+                        <strong
+                            class="animated-counter"
+                            data-target="4"
+                            data-decimals="0"
+                        >0</strong>
+                        <small>RF, SVM, XGBoost and MLP</small>
+                    </div>
+
+                    <div class="metric-card feature-float">
+                        <span>Input Features</span>
+                        <strong
+                            class="animated-counter"
+                            data-target="12"
+                            data-decimals="0"
+                        >0</strong>
+                        <small>Spirometry measurements</small>
+                    </div>
+
+                    <div class="metric-card">
+                        <span>Validation Cases</span>
+                        <strong
+                            class="animated-counter"
+                            data-target="154"
+                            data-decimals="0"
+                        >0</strong>
+                        <small>Independent records</small>
+                    </div>
+
+                    <div class="metric-card">
+                        <span>Ensemble Recall</span>
+                        <strong
+                            class="animated-counter"
+                            data-target="99.03"
+                            data-decimals="2"
+                            data-suffix="%"
+                        >0%</strong>
+                        <small>Independent validation</small>
+                    </div>
+
+                </div>
+
+
+                <div class="content-grid">
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <span class="section-label">
+                                    CLASSIFICATION PIPELINE
+                                </span>
+
+                                <h2>How the system works</h2>
+                            </div>
+                        </div>
+
+                        <div class="pipeline pipeline-live">
+
+                            <div class="pipeline-step">
+                                <span>01</span>
+                                <div>
+                                    <strong>Patient Data</strong>
+                                    <p>
+                                        Twelve spirometry measurements
+                                        are supplied.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="pipeline-step">
+                                <span>02</span>
+                                <div>
+                                    <strong>Preprocessing</strong>
+                                    <p>
+                                        Saved imputation and scaling
+                                        procedures are applied.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="pipeline-step">
+                                <span>03</span>
+                                <div>
+                                    <strong>Base Learners</strong>
+                                    <p>
+                                        RF, SVM, XGBoost and MLP
+                                        generate probabilities.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="pipeline-step">
+                                <span>04</span>
+                                <div>
+                                    <strong>Stacked Classification</strong>
+                                    <p>
+                                        Logistic Regression combines
+                                        the model outputs.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <span class="section-label">
+                            SYSTEM OUTPUT
+                        </span>
+
+                        <h2>Classification classes</h2>
+
+                        <div class="class-box">
+                            <span class="class-marker obstructive"></span>
+
+                            <div>
+                                <strong>Obstructive</strong>
+                                <p>
+                                    Model output class 1
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="class-box">
+                            <span class="class-marker non-obstructive"></span>
+
+                            <div>
+                                <strong>Non-obstructive</strong>
+                                <p>
+                                    Model output class 0
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="notice">
+                            This system is an academic research
+                            prototype and does not replace clinical
+                            diagnosis.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PREDICTION ================= -->
+
+            <section
+                id="prediction"
+                class="page-section"
+            >
+
+                <div class="page-heading compact">
+
+                    <p class="eyebrow">
+                        PATIENT CLASSIFICATION
+                    </p>
+
+                    <h1>Spirometry Assessment</h1>
+
+                    <p>
+                        Enter the patient's pre-bronchodilator and
+                        post-bronchodilator spirometry measurements.
+                    </p>
+
+                </div>
+
+
+                <form id="prediction-form">
+
+                    <div class="spirometry-grid">
+
+
+                        <!-- PRE BD -->
+
+                        <div class="form-panel">
+
+                            <div class="form-panel-heading">
+                                <span>PRE-BD</span>
+                                <h2>Pre-Bronchodilator</h2>
+                                <p>
+                                    Measurements recorded before
+                                    bronchodilator administration.
+                                </p>
+                            </div>
+
+
+                            <div class="measurement-group">
+
+                                <h3>FEV1</h3>
+
+                                <div class="field-row">
+
+                                    <label>
+                                        <span>Measured Value</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FEV1 Pre-BD Value"
+                                            required
+                                            placeholder="Enter value"
+                                        >
+                                    </label>
+
+                                    <label>
+                                        <span>Predicted (%)</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FEV1 Pre-BD Pred"
+                                            required
+                                            placeholder="Enter %"
+                                        >
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="measurement-group">
+
+                                <h3>FVC</h3>
+
+                                <div class="field-row">
+
+                                    <label>
+                                        <span>Measured Value</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FVC Pre-BD Value"
+                                            required
+                                            placeholder="Enter value"
+                                        >
+                                    </label>
+
+                                    <label>
+                                        <span>Predicted (%)</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FVC Pre-BD Pred"
+                                            required
+                                            placeholder="Enter %"
+                                        >
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="measurement-group">
+
+                                <h3>FEF</h3>
+
+                                <div class="field-row">
+
+                                    <label>
+                                        <span>Measured Value</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FEF Pre-BD Value"
+                                            required
+                                            placeholder="Enter value"
+                                        >
+                                    </label>
+
+                                    <label>
+                                        <span>Predicted (%)</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FEF Pre-BD Pred"
+                                            required
+                                            placeholder="Enter %"
+                                        >
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- POST BD -->
+
+                        <div class="form-panel">
+
+                            <div class="form-panel-heading">
+                                <span>POST-BD</span>
+                                <h2>Post-Bronchodilator</h2>
+                                <p>
+                                    Measurements recorded after
+                                    bronchodilator administration.
+                                </p>
+                            </div>
+
+
+                            <div class="measurement-group">
+
+                                <h3>FEV1</h3>
+
+                                <div class="field-row">
+
+                                    <label>
+                                        <span>Measured Value</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FEV1 Post-BD Value"
+                                            required
+                                            placeholder="Enter value"
+                                        >
+                                    </label>
+
+                                    <label>
+                                        <span>Predicted (%)</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FEV1 Post-BD Pred"
+                                            required
+                                            placeholder="Enter %"
+                                        >
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="measurement-group">
+
+                                <h3>FVC</h3>
+
+                                <div class="field-row">
+
+                                    <label>
+                                        <span>Measured Value</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FVC Post-BD Value"
+                                            required
+                                            placeholder="Enter value"
+                                        >
+                                    </label>
+
+                                    <label>
+                                        <span>Predicted (%)</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FVC Post-BD Pred"
+                                            required
+                                            placeholder="Enter %"
+                                        >
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="measurement-group">
+
+                                <h3>FEF</h3>
+
+                                <div class="field-row">
+
+                                    <label>
+                                        <span>Measured Value</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FEF Post-BD Value"
+                                            required
+                                            placeholder="Enter value"
+                                        >
+                                    </label>
+
+                                    <label>
+                                        <span>Predicted (%)</span>
+                                        <input
+                                            type="number"
+                                            step="any"
+                                            min="0"
+                                            name="FEF Post-BD Pred"
+                                            required
+                                            placeholder="Enter %"
+                                        >
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            id="clear-button"
+                        >
+                            Clear Form
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="primary-button"
+                            id="predict-button"
+                        >
+                            Classify Patient
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <!-- Prediction Processing Animation -->
+                <div id="predictionProcessing" class="prediction-processing">
+                    <div class="processing-animation">
+
+                        <div class="processing-lungs">
+                            <span class="processing-lung processing-left"></span>
+                            <span class="processing-lung processing-right"></span>
+                            <span class="processing-trachea"></span>
+
+                            <div class="processing-scan-line"></div>
+                        </div>
+
+                        <div class="processing-text">
+                            <h3>Analyzing Spirometry Data</h3>
+                            <p id="processingStatus">
+                                Validating patient measurements...
+                            </p>
+                        </div>
+
+                        <div class="processing-steps">
+                            <span class="processing-step active"></span>
+                            <span class="processing-step"></span>
+                            <span class="processing-step"></span>
+                            <span class="processing-step"></span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- RESULT -->
+
+                <div
+                    id="prediction-result"
+                    class="result-section hidden"
+                >
+
+                    <!-- FINAL CLASSIFICATION RESULT -->
+
+                    <div class="final-result-card">
+
+                        <div class="final-result-header">
+
+                            <span class="section-label">
+                                CLASSIFICATION RESULT
+                            </span>
+
+                            <span
+                                id="result-badge"
+                                class="result-badge"
+                            >
+                                --
+                            </span>
+
+                        </div>
+
+                        <div class="final-result-main">
+
+                            <div
+                                id="result-icon"
+                                class="result-status-icon"
+                            >
+                                ✓
+                            </div>
+
+                            <span class="result-current-label">
+                                CURRENT CLASSIFICATION
+                            </span>
+
+                            <h2 id="result-classification">
+                                --
+                            </h2>
+
+                            <p id="result-description">
+                                The classification generated from the entered
+                                spirometry measurements will appear here.
+                            </p>
+
+                            <div class="result-probability-area">
+
+                                <div class="result-probability-heading">
+
+                                    <span>
+                                        Obstructive-class probability
+                                    </span>
+
+                                    <strong id="ensemble-probability">
+                                        --%
+                                    </strong>
+
+                                </div>
+
+                                <div class="probability-track">
+
+                                    <div
+                                        id="ensemble-bar"
+                                        class="probability-fill"
+                                    ></div>
+
+                                    <div
+                                        class="threshold-marker"
+                                        title="Decision threshold: 50%"
+                                    ></div>
+
+                                </div>
+
+                                <div class="probability-scale">
+
+                                    <span>0%</span>
+
+                                    <span>
+                                        Decision threshold: 50%
+                                    </span>
+
+                                    <span>100%</span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PREDICTION INFORMATION -->
+
+                        <div class="prediction-information">
+
+                            <h3>Prediction Information</h3>
+
+                            <div class="prediction-info-row">
+
+                                <span>Classification</span>
+
+                                <strong id="info-classification">
+                                    --
+                                </strong>
+
+                            </div>
+
+                            <div class="prediction-info-row">
+
+                                <span>Model Output</span>
+
+                                <strong id="info-model-output">
+                                    --
+                                </strong>
+
+                            </div>
+
+                            <div class="prediction-info-row">
+
+                                <span>Decision Threshold</span>
+
+                                <strong>
+                                    0.50
+                                </strong>
+
+                            </div>
+
+                            <div class="prediction-info-row">
+
+                                <span>Classification Model</span>
+
+                                <strong>
+                                    Stacked Ensemble
+                                </strong>
+
+                            </div>
+
+                            <div class="prediction-info-row">
+
+                                <span>System Status</span>
+
+                                <strong>
+                                    Ready
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENSEMBLE DETAILS -->
+
+                        <details class="ensemble-details">
+
+                            <summary>
+                                View Ensemble Details
+                            </summary>
+
+                            <div class="ensemble-details-content">
+
+                                <div class="ensemble-detail-block">
+
+                                    <span>
+                                        BASE LEARNERS
+                                    </span>
+
+                                    <p>
+                                        Random Forest, Support Vector Machine,
+                                        XGBoost and Multilayer Perceptron
+                                    </p>
+
+                                </div>
+
+                                <div class="ensemble-detail-block">
+
+                                    <span>
+                                        META-LEARNER
+                                    </span>
+
+                                    <p>
+                                        Logistic Regression
+                                    </p>
+
+                                </div>
+
+                                <div class="ensemble-detail-block">
+
+                                    <span>
+                                        BASE MODEL AGREEMENT
+                                    </span>
+
+                                    <p id="agreement-description">
+                                        --
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </details>
+
+                        <!-- NOTICE -->
+
+                        <div class="result-important-notice">
+
+                            <strong>
+                                Important Notice
+                            </strong>
+
+                            <p>
+                                This output is generated by an academic machine
+                                learning research prototype. It should not be
+                                interpreted as a clinical diagnosis or used as a
+                                substitute for assessment by a qualified healthcare
+                                professional.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PERFORMANCE ================= -->
+
+            <section
+                id="performance"
+                class="page-section"
+            >
+
+                <div class="page-heading compact">
+
+                    <p class="eyebrow">
+                        INDEPENDENT VALIDATION
+                    </p>
+
+                    <h1>Model Performance</h1>
+
+                    <p>
+                        Performance obtained on the independent
+                        validation dataset containing 154 records.
+                    </p>
+
+                </div>
+
+
+                <div class="table-panel">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Accuracy</th>
+                                    <th>Precision</th>
+                                    <th>Recall</th>
+                                    <th>Specificity</th>
+                                    <th>F1</th>
+                                    <th>ROC-AUC</th>
+                                    <th>MCC</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Random Forest</td>
+                                    <td>85.71%</td>
+                                    <td>89.32%</td>
+                                    <td>89.32%</td>
+                                    <td>78.43%</td>
+                                    <td>89.32%</td>
+                                    <td>93.41%</td>
+                                    <td>0.6775</td>
+                                </tr>
+
+                                <tr>
+                                    <td>SVM</td>
+                                    <td>86.36%</td>
+                                    <td>89.42%</td>
+                                    <td>90.29%</td>
+                                    <td>78.43%</td>
+                                    <td>89.86%</td>
+                                    <td>95.77%</td>
+                                    <td>0.6907</td>
+                                </tr>
+
+                                <tr>
+                                    <td>XGBoost</td>
+                                    <td>87.01%</td>
+                                    <td>89.52%</td>
+                                    <td>91.26%</td>
+                                    <td>78.43%</td>
+                                    <td>90.38%</td>
+                                    <td>92.80%</td>
+                                    <td>0.7042</td>
+                                </tr>
+
+                                <tr>
+                                    <td>MLP</td>
+                                    <td>85.71%</td>
+                                    <td>86.49%</td>
+                                    <td>93.20%</td>
+                                    <td>70.59%</td>
+                                    <td>89.72%</td>
+                                    <td>93.77%</td>
+                                    <td>0.6692</td>
+                                </tr>
+
+                                <tr class="ensemble-row">
+                                    <td>Stacked Ensemble</td>
+                                    <td
+                                        class="animated-counter"
+                                        data-target="84.42"
+                                        data-decimals="2"
+                                        data-suffix="%"
+                                    >0%</td>
+                                    <td>81.60%</td>
+                                    <td
+                                        class="animated-counter"
+                                        data-target="99.03"
+                                        data-decimals="2"
+                                        data-suffix="%"
+                                    >0%</td>
+                                    <td>54.90%</td>
+                                    <td>89.47%</td>
+                                    <td
+                                        class="animated-counter"
+                                        data-target="95.03"
+                                        data-decimals="2"
+                                        data-suffix="%"
+                                    >0%</td>
+                                    <td>0.6492</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <div class="performance-notes">
+
+                    <div class="performance-card">
+                        <span>Highest Accuracy</span>
+                        <strong>XGBoost</strong>
+                        <p>87.01%</p>
+                    </div>
+
+                    <div class="performance-card">
+                        <span>Highest ROC-AUC</span>
+                        <strong>SVM</strong>
+                        <p>95.77%</p>
+                    </div>
+
+                    <div class="performance-card">
+                        <span>Highest Recall</span>
+                        <strong>Stacked Ensemble</strong>
+                        <p>99.03%</p>
+                    </div>
+
+                    <div class="performance-card">
+                        <span>Obstructive Cases Detected</span>
+                        <strong>102 / 103</strong>
+                        <p>Stacked ensemble</p>
+                    </div>
+
+                </div>
+
+                <div class="performance-observation">
+
+                    <strong>Stacked Ensemble Validation Behaviour</strong>
+
+                    <p>
+                        The stacked ensemble identified 102 of the 103
+                        obstructive cases, producing a recall of 99.03%.
+                        It also classified 23 of the 51 non-obstructive
+                        cases as obstructive, resulting in a specificity
+                        of 54.90%.
+                    </p>
+
+                </div>
+
+
+                <!-- ================= PERFORMANCE VISUALIZATIONS ================= -->
+
+                <div class="visualization-section">
+
+                    <div class="visualization-heading">
+
+                        <span class="section-label">
+                            PERFORMANCE VISUALIZATION
+                        </span>
+
+                        <h2>Independent Validation Analysis</h2>
+
+                        <p>
+                            Visualizations generated from the independent
+                            validation results of the implemented models.
+                        </p>
+
+                    </div>
+
+                    <!-- MAIN CHARTS -->
+
+                    <div class="chart-grid">
+
+                        <div class="chart-card">
+
+                            <div class="chart-card-header">
+                                <div>
+                                    <h3>Model Metric Comparison</h3>
+                                    <p>
+                                        Comparison of the evaluation metrics
+                                        obtained by the five models.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/validation_model_metric_comparison.png'
+                                ) }}"
+                                alt="Independent validation model metric comparison"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                        <div class="chart-card">
+
+                            <div class="chart-card-header">
+                                <div>
+                                    <h3>ROC Curve Comparison</h3>
+                                    <p>
+                                        ROC curves obtained on the independent
+                                        validation dataset.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/validation_roc_curves.png'
+                                ) }}"
+                                alt="Independent validation ROC curves"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <!-- CONFUSION MATRICES -->
+
+                    <div class="subsection-heading">
+
+                        <span class="section-label">
+                            CLASSIFICATION OUTCOMES
+                        </span>
+
+                        <h2>Confusion Matrix Analysis</h2>
+
+                        <p>
+                            True-positive, true-negative, false-positive and
+                            false-negative classifications obtained on the
+                            independent validation dataset.
+                        </p>
+
+                    </div>
+
+                    <div class="chart-viewer">
+
+                        <div class="viewer-controls">
+
+                            <button
+                                class="viewer-button confusion-button active"
+                                data-image="confusion_matrix_random_forest.png"
+                                data-title="Random Forest Confusion Matrix"
+                            >
+                                Random Forest
+                            </button>
+
+                            <button
+                                class="viewer-button confusion-button"
+                                data-image="confusion_matrix_svm.png"
+                                data-title="SVM Confusion Matrix"
+                            >
+                                SVM
+                            </button>
+
+                            <button
+                                class="viewer-button confusion-button"
+                                data-image="confusion_matrix_xgboost.png"
+                                data-title="XGBoost Confusion Matrix"
+                            >
+                                XGBoost
+                            </button>
+
+                            <button
+                                class="viewer-button confusion-button"
+                                data-image="confusion_matrix_mlp.png"
+                                data-title="MLP Confusion Matrix"
+                            >
+                                MLP
+                            </button>
+
+                            <button
+                                class="viewer-button confusion-button"
+                                data-image="confusion_matrix_stacked_ensemble.png"
+                                data-title="Stacked Ensemble Confusion Matrix"
+                            >
+                                Stacked Ensemble
+                            </button>
+
+                        </div>
+
+                        <div class="viewer-display">
+
+                            <div class="viewer-title">
+
+                                <span>SELECTED MODEL</span>
+
+                                <h3 id="confusion-title">
+                                    Random Forest Confusion Matrix
+                                </h3>
+
+                            </div>
+
+                            <img
+                                id="confusion-image"
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/confusion_matrix_random_forest.png'
+                                ) }}"
+                                alt="Random Forest confusion matrix"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <!-- DEVELOPMENT VS VALIDATION -->
+
+                    <div class="subsection-heading">
+
+                        <span class="section-label">
+                            GENERALIZATION ANALYSIS
+                        </span>
+
+                        <h2>Development vs Independent Validation</h2>
+
+                        <p>
+                            Comparison between the out-of-fold development
+                            performance and the final independent validation
+                            performance.
+                        </p>
+
+                    </div>
+
+                    <div class="chart-viewer">
+
+                        <div class="viewer-controls">
+
+                            <button
+                                class="viewer-button comparison-button active"
+                                data-image="development_vs_validation_accuracy.png"
+                                data-title="Development vs Validation Accuracy"
+                            >
+                                Accuracy
+                            </button>
+
+                            <button
+                                class="viewer-button comparison-button"
+                                data-image="development_vs_validation_f1.png"
+                                data-title="Development vs Validation F1 Score"
+                            >
+                                F1 Score
+                            </button>
+
+                            <button
+                                class="viewer-button comparison-button"
+                                data-image="development_vs_validation_roc_auc.png"
+                                data-title="Development vs Validation ROC-AUC"
+                            >
+                                ROC-AUC
+                            </button>
+
+                            <button
+                                class="viewer-button comparison-button"
+                                data-image="development_vs_validation_mcc.png"
+                                data-title="Development vs Validation MCC"
+                            >
+                                MCC
+                            </button>
+
+                        </div>
+
+                        <div class="viewer-display">
+
+                            <div class="viewer-title">
+
+                                <span>SELECTED METRIC</span>
+
+                                <h3 id="comparison-title">
+                                    Development vs Validation Accuracy
+                                </h3>
+
+                            </div>
+
+                            <img
+                                id="comparison-image"
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/development_vs_validation_accuracy.png'
+                                ) }}"
+                                alt="Development versus validation accuracy"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= METHODOLOGY ================= -->
+
+            <section
+                id="methodology"
+                class="page-section"
+            >
+
+                <div class="page-heading compact">
+
+                    <p class="eyebrow">
+                        IMPLEMENTATION
+                    </p>
+
+                    <h1>Methodology</h1>
+
+                    <p>
+                        Summary of the implemented machine learning
+                        classification pipeline.
+                    </p>
+
+                </div>
+
+
+                <div class="method-grid">
+
+                    <div class="method-card">
+                        <span>01</span>
+                        <h3>Development Data</h3>
+                        <p>
+                            The cleaned development dataset contained
+                            1,166 spirometry records and 12 predictor
+                            variables.
+                        </p>
+                    </div>
+
+                    <div class="method-card">
+                        <span>02</span>
+                        <h3>Missing Values</h3>
+                        <p>
+                            Median imputation was fitted using
+                            development data and applied through the
+                            saved preprocessing pipeline.
+                        </p>
+                    </div>
+
+                    <div class="method-card">
+                        <span>03</span>
+                        <h3>Class Balancing</h3>
+                        <p>
+                            Random undersampling was restricted to
+                            training data to balance obstructive and
+                            non-obstructive observations.
+                        </p>
+                    </div>
+
+                    <div class="method-card">
+                        <span>04</span>
+                        <h3>Cross-Validation</h3>
+                        <p>
+                            Five-fold stratified cross-validation was
+                            used to generate out-of-fold model
+                            predictions.
+                        </p>
+                    </div>
+
+                    <div class="method-card">
+                        <span>05</span>
+                        <h3>Base Learners</h3>
+                        <p>
+                            Random Forest, SVM, XGBoost and MLP were
+                            trained as the four individual
+                            classifiers.
+                        </p>
+                    </div>
+
+                    <div class="method-card">
+                        <span>06</span>
+                        <h3>Stacking</h3>
+                        <p>
+                            Logistic Regression combined the
+                            out-of-fold probability outputs of the
+                            four base learners.
+                        </p>
+                    </div>
+
+                    <div class="method-card">
+                        <span>07</span>
+                        <h3>Independent Validation</h3>
+                        <p>
+                            The completed models were evaluated on
+                            154 records that were not used during
+                            model development.
+                        </p>
+                    </div>
+
+                    <div class="method-card">
+                        <span>08</span>
+                        <h3>Deployment</h3>
+                        <p>
+                            The complete preprocessing and ensemble
+                            pipeline was serialized and integrated
+                            into this Flask application.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PROJECT ================= -->
+
+        </main>
+
+    </div>
+
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}"
+    ></script>
+
+</body>
+
+</html>
